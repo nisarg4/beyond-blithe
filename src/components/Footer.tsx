@@ -1,15 +1,25 @@
 import Link from "next/link";
+import type { SiteSettings } from "@/sanity/types";
 
-export default function Footer() {
+export default function Footer({
+  settings,
+}: {
+  settings: SiteSettings | null;
+}) {
   return (
-    <footer className="bg-stone-900 text-stone-300 py-12">
-      <div className="max-w-6xl mx-auto px-6">
+    <footer className="bg-royal-950 text-royal-200 py-12 relative overflow-hidden">
+      <div className="absolute inset-0 bg-gradient-to-b from-royal-900/20 to-transparent pointer-events-none" />
+      <div className="max-w-6xl mx-auto px-6 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div>
-            <h3 className="text-xl font-semibold text-white mb-4">Beyond Blithe</h3>
-            <p className="text-sm leading-relaxed">
-              Creating memorable moments for families in Toronto.
-              We treat every event like it&apos;s our own.
+            <h3
+              className="text-xl font-semibold mb-4 bg-gradient-to-r from-gold-400 to-gold-300 bg-clip-text text-transparent"
+              style={{ fontFamily: "var(--font-display)" }}
+            >
+              {settings?.companyName ?? "Beyond Blithe"}
+            </h3>
+            <p className="text-sm leading-relaxed text-royal-300">
+              {settings?.footerTagline ?? "Creating memorable moments for families in Toronto. We treat every event like it's our own."}
             </p>
           </div>
           <div>
@@ -25,27 +35,27 @@ export default function Footer() {
           <div>
             <h4 className="font-medium text-white mb-4">Contact</h4>
             <ul className="space-y-2 text-sm">
-              <li>Toronto, Canada</li>
+              <li>{settings?.location ?? "Toronto, Canada"}</li>
               <li>
-                <Link href="/contact" className="hover:text-white transition-colors">
+                <Link href="/contact" className="hover:text-gold-300 transition-colors">
                   Get in Touch
                 </Link>
               </li>
               <li>
                 <a
-                  href="https://www.instagram.com/beyondblithe/"
+                  href={settings?.instagramUrl ?? "https://www.instagram.com/beyondblithe/"}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hover:text-white transition-colors"
+                  className="hover:text-gold-300 transition-colors"
                 >
-                  @beyondblithe
+                  {settings?.instagramHandle ?? "@beyondblithe"}
                 </a>
               </li>
             </ul>
           </div>
         </div>
-        <div className="border-t border-stone-700 mt-8 pt-8 text-center text-sm">
-          <p>&copy; {new Date().getFullYear()} Beyond Blithe. All rights reserved.</p>
+        <div className="border-t border-royal-800/50 mt-8 pt-8 text-center text-sm">
+          <p>&copy; {new Date().getFullYear()} {settings?.companyName ?? "Beyond Blithe"}. All rights reserved.</p>
         </div>
       </div>
     </footer>

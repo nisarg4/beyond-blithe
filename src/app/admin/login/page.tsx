@@ -30,9 +30,9 @@ export default function AdminLogin() {
   };
 
   return (
-    <div className="min-h-screen bg-stone-100 flex items-center justify-center px-6">
+    <div className="min-h-screen bg-warm-100 flex items-center justify-center px-6">
       <div className="bg-white p-8 rounded-lg shadow-sm max-w-md w-full">
-        <h1 className="text-2xl font-semibold text-stone-800 mb-6 text-center">
+        <h1 className="text-2xl font-semibold text-royal-900 mb-6 text-center">
           Admin Login
         </h1>
 
@@ -44,7 +44,7 @@ export default function AdminLogin() {
           )}
 
           <div>
-            <label htmlFor="email" className="block text-sm font-medium text-stone-700 mb-1">
+            <label htmlFor="email" className="block text-sm font-medium text-warm-700 mb-1">
               Email
             </label>
             <input
@@ -53,12 +53,12 @@ export default function AdminLogin() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
-              className="w-full px-4 py-3 border border-stone-300 rounded-lg focus:ring-2 focus:ring-stone-500 focus:border-transparent"
+              className="w-full px-4 py-3 border border-warm-300 rounded-lg focus:ring-2 focus:ring-royal-500 focus:border-transparent"
             />
           </div>
 
           <div>
-            <label htmlFor="password" className="block text-sm font-medium text-stone-700 mb-1">
+            <label htmlFor="password" className="block text-sm font-medium text-warm-700 mb-1">
               Password
             </label>
             <input
@@ -67,14 +67,14 @@ export default function AdminLogin() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
-              className="w-full px-4 py-3 border border-stone-300 rounded-lg focus:ring-2 focus:ring-stone-500 focus:border-transparent"
+              className="w-full px-4 py-3 border border-warm-300 rounded-lg focus:ring-2 focus:ring-royal-500 focus:border-transparent"
             />
           </div>
 
           <button
             type="submit"
             disabled={isLoading}
-            className="w-full bg-stone-800 text-white py-3 rounded-lg font-medium hover:bg-stone-700 transition-colors disabled:bg-stone-400"
+            className="w-full bg-royal-700 text-white py-3 rounded-lg font-medium hover:bg-royal-600 transition-colors disabled:bg-warm-400"
           >
             {isLoading ? "Signing in..." : "Sign In"}
           </button>

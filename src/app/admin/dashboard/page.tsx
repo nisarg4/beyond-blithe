@@ -61,7 +61,6 @@ export default function AdminDashboard() {
     setMessage({ type: "", text: "" });
 
     try {
-      // Upload to storage
       const fileExt = selectedFile.name.split(".").pop();
       const fileName = `${Date.now()}.${fileExt}`;
 
@@ -71,12 +70,10 @@ export default function AdminDashboard() {
 
       if (uploadError) throw uploadError;
 
-      // Get public URL
       const { data: urlData } = supabase.storage
         .from("gallery")
         .getPublicUrl(fileName);
 
-      // Save to database
       const { error: dbError } = await supabase.from("gallery_images").insert({
         image_url: urlData.publicUrl,
         event_type: uploadForm.eventType,
@@ -100,15 +97,12 @@ export default function AdminDashboard() {
     if (!confirm("Are you sure you want to delete this image?")) return;
 
     try {
-      // Extract filename from URL
       const fileName = imageUrl.split("/").pop();
 
-      // Delete from storage
       if (fileName) {
         await supabase.storage.from("gallery").remove([fileName]);
       }
 
-      // Delete from database
       await supabase.from("gallery_images").delete().eq("id", id);
 
       fetchImages();
@@ -120,25 +114,25 @@ export default function AdminDashboard() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-stone-100 flex items-center justify-center">
-        <p className="text-stone-600">Loading...</p>
+      <div className="min-h-screen bg-warm-100 flex items-center justify-center">
+        <p className="text-warm-600">Loading...</p>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-stone-100">
+    <div className="min-h-screen bg-warm-100">
       {/* Header */}
-      <header className="bg-white border-b border-stone-200 px-6 py-4">
+      <header className="bg-white border-b border-warm-200 px-6 py-4">
         <div className="max-w-6xl mx-auto flex items-center justify-between">
-          <h1 className="text-xl font-semibold text-stone-800">Beyond Blithe Admin</h1>
+          <h1 className="text-xl font-semibold text-royal-900">Beyond Blithe Admin</h1>
           <div className="flex items-center gap-4">
-            <Link href="/admin/inquiries" className="text-stone-600 hover:text-stone-800">
+            <Link href="/admin/inquiries" className="text-warm-600 hover:text-royal-700">
               Inquiries
             </Link>
             <button
               onClick={handleLogout}
-              className="text-stone-600 hover:text-stone-800"
+              className="text-warm-600 hover:text-royal-700"
             >
               Logout
             </button>
@@ -160,11 +154,11 @@ export default function AdminDashboard() {
 
         {/* Upload Form */}
         <div className="bg-white rounded-lg p-6 mb-8">
-          <h2 className="text-lg font-semibold text-stone-800 mb-4">Upload New Image</h2>
+          <h2 className="text-lg font-semibold text-royal-900 mb-4">Upload New Image</h2>
           <form onSubmit={handleUpload} className="space-y-4">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div>
-                <label className="block text-sm font-medium text-stone-700 mb-1">
+                <label className="block text-sm font-medium text-warm-700 mb-1">
                   Image File *
                 </label>
                 <input
@@ -176,13 +170,13 @@ export default function AdminDashboard() {
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-stone-700 mb-1">
+                <label className="block text-sm font-medium text-warm-700 mb-1">
                   Event Type *
                 </label>
                 <select
                   value={uploadForm.eventType}
                   onChange={(e) => setUploadForm({ ...uploadForm, eventType: e.target.value })}
-                  className="w-full px-3 py-2 border border-stone-300 rounded-lg"
+                  className="w-full px-3 py-2 border border-warm-300 rounded-lg"
                   required
                 >
                   <option value="">Select type</option>
@@ -192,14 +186,14 @@ export default function AdminDashboard() {
                 </select>
               </div>
               <div>
-                <label className="block text-sm font-medium text-stone-700 mb-1">
+                <label className="block text-sm font-medium text-warm-700 mb-1">
                   Caption
                 </label>
                 <input
                   type="text"
                   value={uploadForm.caption}
                   onChange={(e) => setUploadForm({ ...uploadForm, caption: e.target.value })}
-                  className="w-full px-3 py-2 border border-stone-300 rounded-lg"
+                  className="w-full px-3 py-2 border border-warm-300 rounded-lg"
                   placeholder="Optional caption"
                 />
               </div>
@@ -207,7 +201,7 @@ export default function AdminDashboard() {
             <button
               type="submit"
               disabled={isUploading || !selectedFile}
-              className="bg-stone-800 text-white px-6 py-2 rounded-lg hover:bg-stone-700 disabled:bg-stone-400"
+              className="bg-royal-700 text-white px-6 py-2 rounded-lg hover:bg-royal-600 disabled:bg-warm-400"
             >
               {isUploading ? "Uploading..." : "Upload Image"}
             </button>
@@ -216,7 +210,7 @@ export default function AdminDashboard() {
 
         {/* Gallery Grid */}
         <div className="bg-white rounded-lg p-6">
-          <h2 className="text-lg font-semibold text-stone-800 mb-4">
+          <h2 className="text-lg font-semibold text-royal-900 mb-4">
             Gallery Images ({images.length})
           </h2>
           {images.length > 0 ? (
@@ -241,7 +235,7 @@ export default function AdminDashboard() {
               ))}
             </div>
           ) : (
-            <p className="text-stone-500 text-center py-8">
+            <p className="text-warm-500 text-center py-8">
               No images yet. Upload your first image above.
             </p>
           )}

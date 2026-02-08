@@ -76,30 +76,30 @@ export default function AdminInquiries() {
     new: "bg-blue-100 text-blue-700",
     contacted: "bg-yellow-100 text-yellow-700",
     booked: "bg-green-100 text-green-700",
-    archived: "bg-stone-100 text-stone-700",
+    archived: "bg-warm-100 text-warm-700",
   };
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-stone-100 flex items-center justify-center">
-        <p className="text-stone-600">Loading...</p>
+      <div className="min-h-screen bg-warm-100 flex items-center justify-center">
+        <p className="text-warm-600">Loading...</p>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-stone-100">
+    <div className="min-h-screen bg-warm-100">
       {/* Header */}
-      <header className="bg-white border-b border-stone-200 px-6 py-4">
+      <header className="bg-white border-b border-warm-200 px-6 py-4">
         <div className="max-w-6xl mx-auto flex items-center justify-between">
-          <h1 className="text-xl font-semibold text-stone-800">Beyond Blithe Admin</h1>
+          <h1 className="text-xl font-semibold text-royal-900">Beyond Blithe Admin</h1>
           <div className="flex items-center gap-4">
-            <Link href="/admin/dashboard" className="text-stone-600 hover:text-stone-800">
+            <Link href="/admin/dashboard" className="text-warm-600 hover:text-royal-700">
               Gallery
             </Link>
             <button
               onClick={handleLogout}
-              className="text-stone-600 hover:text-stone-800"
+              className="text-warm-600 hover:text-royal-700"
             >
               Logout
             </button>
@@ -108,7 +108,7 @@ export default function AdminInquiries() {
       </header>
 
       <div className="max-w-6xl mx-auto px-6 py-8">
-        <h2 className="text-lg font-semibold text-stone-800 mb-4">
+        <h2 className="text-lg font-semibold text-royal-900 mb-4">
           Inquiries ({inquiries.length})
         </h2>
 
@@ -116,28 +116,28 @@ export default function AdminInquiries() {
           {/* Inquiries List */}
           <div className="bg-white rounded-lg overflow-hidden">
             {inquiries.length > 0 ? (
-              <div className="divide-y divide-stone-200">
+              <div className="divide-y divide-warm-200">
                 {inquiries.map((inquiry) => (
                   <div
                     key={inquiry.id}
                     onClick={() => setSelectedInquiry(inquiry)}
-                    className={`p-4 cursor-pointer hover:bg-stone-50 ${
-                      selectedInquiry?.id === inquiry.id ? "bg-stone-50" : ""
+                    className={`p-4 cursor-pointer hover:bg-warm-50 ${
+                      selectedInquiry?.id === inquiry.id ? "bg-royal-50" : ""
                     }`}
                   >
                     <div className="flex items-center justify-between mb-1">
-                      <span className="font-medium text-stone-800">{inquiry.name}</span>
+                      <span className="font-medium text-warm-800">{inquiry.name}</span>
                       <span className={`text-xs px-2 py-1 rounded ${statusColors[inquiry.status]}`}>
                         {inquiry.status}
                       </span>
                     </div>
-                    <p className="text-sm text-stone-600">{inquiry.event_type}</p>
-                    <p className="text-xs text-stone-400">{formatDate(inquiry.created_at)}</p>
+                    <p className="text-sm text-warm-600">{inquiry.event_type}</p>
+                    <p className="text-xs text-warm-400">{formatDate(inquiry.created_at)}</p>
                   </div>
                 ))}
               </div>
             ) : (
-              <p className="text-stone-500 text-center py-8">No inquiries yet.</p>
+              <p className="text-warm-500 text-center py-8">No inquiries yet.</p>
             )}
           </div>
 
@@ -146,7 +146,7 @@ export default function AdminInquiries() {
             {selectedInquiry ? (
               <div>
                 <div className="flex items-center justify-between mb-4">
-                  <h3 className="text-lg font-semibold text-stone-800">
+                  <h3 className="text-lg font-semibold text-royal-900">
                     {selectedInquiry.name}
                   </h3>
                   <select
@@ -163,57 +163,57 @@ export default function AdminInquiries() {
 
                 <div className="space-y-3 text-sm">
                   <div>
-                    <span className="text-stone-500">Email:</span>{" "}
-                    <a href={`mailto:${selectedInquiry.email}`} className="text-stone-800 underline">
+                    <span className="text-warm-500">Email:</span>{" "}
+                    <a href={`mailto:${selectedInquiry.email}`} className="text-royal-700 underline">
                       {selectedInquiry.email}
                     </a>
                   </div>
                   {selectedInquiry.phone && (
                     <div>
-                      <span className="text-stone-500">Phone:</span>{" "}
-                      <a href={`tel:${selectedInquiry.phone}`} className="text-stone-800">
+                      <span className="text-warm-500">Phone:</span>{" "}
+                      <a href={`tel:${selectedInquiry.phone}`} className="text-warm-800">
                         {selectedInquiry.phone}
                       </a>
                     </div>
                   )}
                   <div>
-                    <span className="text-stone-500">Event Type:</span>{" "}
-                    <span className="text-stone-800">
+                    <span className="text-warm-500">Event Type:</span>{" "}
+                    <span className="text-warm-800">
                       {selectedInquiry.event_type}
                       {selectedInquiry.event_type_other && ` - ${selectedInquiry.event_type_other}`}
                     </span>
                   </div>
                   {selectedInquiry.event_date && (
                     <div>
-                      <span className="text-stone-500">Event Date:</span>{" "}
-                      <span className="text-stone-800">{selectedInquiry.event_date}</span>
+                      <span className="text-warm-500">Event Date:</span>{" "}
+                      <span className="text-warm-800">{selectedInquiry.event_date}</span>
                     </div>
                   )}
                   {selectedInquiry.guest_count && (
                     <div>
-                      <span className="text-stone-500">Guests:</span>{" "}
-                      <span className="text-stone-800">{selectedInquiry.guest_count}</span>
+                      <span className="text-warm-500">Guests:</span>{" "}
+                      <span className="text-warm-800">{selectedInquiry.guest_count}</span>
                     </div>
                   )}
                   <div>
-                    <span className="text-stone-500">Found us via:</span>{" "}
-                    <span className="text-stone-800">
+                    <span className="text-warm-500">Found us via:</span>{" "}
+                    <span className="text-warm-800">
                       {selectedInquiry.hear_about_us}
                       {selectedInquiry.hear_about_us_other && ` - ${selectedInquiry.hear_about_us_other}`}
                     </span>
                   </div>
                   <div>
-                    <span className="text-stone-500">Submitted:</span>{" "}
-                    <span className="text-stone-800">{formatDate(selectedInquiry.created_at)}</span>
+                    <span className="text-warm-500">Submitted:</span>{" "}
+                    <span className="text-warm-800">{formatDate(selectedInquiry.created_at)}</span>
                   </div>
-                  <div className="pt-3 border-t border-stone-200">
-                    <span className="text-stone-500 block mb-1">Message:</span>
-                    <p className="text-stone-800 whitespace-pre-wrap">{selectedInquiry.message}</p>
+                  <div className="pt-3 border-t border-warm-200">
+                    <span className="text-warm-500 block mb-1">Message:</span>
+                    <p className="text-warm-800 whitespace-pre-wrap">{selectedInquiry.message}</p>
                   </div>
                 </div>
               </div>
             ) : (
-              <p className="text-stone-500 text-center py-8">
+              <p className="text-warm-500 text-center py-8">
                 Select an inquiry to view details
               </p>
             )}
