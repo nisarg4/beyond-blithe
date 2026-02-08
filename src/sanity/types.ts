@@ -85,6 +85,8 @@ export interface SiteSettings {
   location?: string;
   instagramUrl?: string;
   instagramHandle?: string;
+  facebookUrl?: string;
+  linkedinUrl?: string;
   seoTitleTemplate?: string;
   seoDefaultDescription?: string;
   footerTagline?: string;

@@ -39,6 +39,16 @@ export default defineType({
       type: "string",
     }),
     defineField({
+      name: "facebookUrl",
+      title: "Facebook URL",
+      type: "url",
+    }),
+    defineField({
+      name: "linkedinUrl",
+      title: "LinkedIn URL",
+      type: "url",
+    }),
+    defineField({
       name: "seoTitleTemplate",
       title: "SEO Title Template",
       description: "e.g. 'Beyond Blithe | Event Management Toronto'",

@@ -2,12 +2,21 @@ import Link from "next/link";
 import { FloatingSparkles, GradientOrb } from "@/components/DecorativeElements";
 import ScrollAnimationWrapper from "@/components/ScrollAnimationWrapper";
 import { getHomePage, getServicesForHome } from "@/sanity/queries";
+import { supabase } from "@/lib/supabase";
 
 export default async function Home() {
-  const [content, services] = await Promise.all([
+  const [content, services, featuredVideoResult] = await Promise.all([
     getHomePage(),
     getServicesForHome(),
+    supabase
+      .from("gallery_videos")
+      .select("*")
+      .eq("is_featured", true)
+      .limit(1)
+      .single(),
   ]);
+
+  const featuredVideo = featuredVideoResult.data;
 
   const fallbackServices = [
     { _id: "1", title: "Weddings", icon: "💍", shortDescription: "From intimate ceremonies to grand celebrations, we make your special day unforgettable." },
@@ -93,6 +102,38 @@ export default async function Home() {
           </div>
         </div>
       </section>
+
+      {/* Featured Video Section */}
+      {featuredVideo && (
+        <section className="py-24 bg-gradient-to-br from-royal-50 via-warm-50 to-gold-50/20">
+          <div className="max-w-4xl mx-auto px-6">
+            <h2
+              className="text-3xl font-semibold text-royal-900 mb-4 text-center scroll-animate"
+              style={{ fontFamily: "var(--font-display)" }}
+            >
+              See Us in Action
+            </h2>
+            <div className="flex items-center justify-center mb-10 scroll-animate">
+              <div className="h-px w-12 bg-gradient-to-r from-transparent to-royal-300" />
+              <div className="w-2 h-2 rotate-45 bg-gold-500 mx-3" />
+              <div className="h-px w-12 bg-gradient-to-l from-transparent to-royal-300" />
+            </div>
+            <div className="scroll-animate aspect-video rounded-xl overflow-hidden shadow-xl">
+              <video
+                src={featuredVideo.video_url}
+                poster={featuredVideo.thumbnail_url || undefined}
+                controls
+                className="w-full h-full object-cover"
+              />
+            </div>
+            {featuredVideo.title && (
+              <p className="mt-4 text-center text-warm-600 text-lg scroll-animate">
+                {featuredVideo.title}
+              </p>
+            )}
+          </div>
+        </section>
+      )}
 
       {/* CTA Section */}
       <section className="py-24 bg-gradient-to-br from-royal-950 via-royal-900 to-royal-950 text-white relative overflow-hidden">

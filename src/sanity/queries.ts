@@ -93,7 +93,7 @@ export async function getSiteSettings(): Promise<SiteSettings | null> {
   return client.fetch(
     `*[_type == "siteSettings"][0] {
       companyName, tagline, description, location,
-      instagramUrl, instagramHandle,
+      instagramUrl, instagramHandle, facebookUrl, linkedinUrl,
       seoTitleTemplate, seoDefaultDescription, footerTagline
     }`,
     {},
