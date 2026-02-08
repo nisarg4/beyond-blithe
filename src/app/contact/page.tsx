@@ -1,8 +1,11 @@
-import { getContactPage } from "@/sanity/queries";
+import { getContactPage, getSiteSettings } from "@/sanity/queries";
 import ContactForm from "./ContactForm";
 
 export default async function Contact() {
-  const content = await getContactPage();
+  const [content, settings] = await Promise.all([
+    getContactPage(),
+    getSiteSettings(),
+  ]);
 
   return (
     <div className="min-h-screen bg-white">
@@ -21,7 +24,7 @@ export default async function Contact() {
         </div>
       </section>
 
-      <ContactForm content={content} />
+      <ContactForm content={content} settings={settings} />
     </div>
   );
 }
